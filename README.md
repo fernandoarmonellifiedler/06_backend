@@ -8,3 +8,5 @@ Uso de:
 Link del formulario: http://localhost:3000/static/
 
 server-2: base de datos relacional con mysql. Lista de artistas.
+
+server-3: using handlebars
