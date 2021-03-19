@@ -1,5 +1,5 @@
 # backend-exercises
- exercises and practices on creating servers, API integrations and so on
+exercises and practices on creating servers, API integrations and so on
 
 server-1: primer ejercicio recibiendo información de un formulario y devolviendo los datos ingresador al cliente.
 Uso de:
