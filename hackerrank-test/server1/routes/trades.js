@@ -22,11 +22,10 @@ const Trades = require('../models/trades');
 /trades?type=buy&user_id=2
  */
 router.get('/', async (req, res, next) => {
-  console.log("req.query "+req.query);
+  console.log('req.query ' + req.query);
   try {
     let type = req.query.type;
     let user_id = req.query.user_id;
-    
 
     const respuesta = await Trades.findAll();
     res.status(200).send(respuesta);
@@ -42,19 +41,16 @@ router.get('/', async (req, res, next) => {
 - if there is no trade with the given id in the collection, the response code is 404 with the body having the text `ID not found` (OK!)
 */
 router.get('/:id', async (req, res, next) => {
-  console.log( "req.params.id",req.params.id);
   try {
-    const respuesta = await Trades.findOne({ where: { id: req.params.id } })
+    const respuesta = await Trades.findOne({ where: { id: req.params.id } });
     console.log(respuesta);
     if (respuesta === null) {
-      console.log('Not found!');
-    } else {
-      console.log('found!');
+      throw new Error('ID not found');
     }
 
     res.status(200).send(respuesta);
   } catch (e) {
-    console.error("sdsdsd",e.message);
+    console.error(e.message);
     res.status(404).send(e.message);
   }
 });
@@ -71,7 +67,7 @@ creates a new trade
 router.post('/', async (req, res, next) => {
   try {
     // checks if the shares value is out of accepted range [1, 100]
-    if (req.body.range < 1 || req.body.range > 100) {
+    if (req.body.shares < 1 || req.body.shares > 100) {
       throw new Error('Range must be between 1 and 100');
     }
     // checks if the type value is invalid (i.e. not 'buy' or 'sell')
