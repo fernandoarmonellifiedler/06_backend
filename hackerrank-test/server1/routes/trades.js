@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Trades = require('../models/trades');
+// const querystring = require('querystring');
 
 /* trade object example
 {
@@ -22,11 +23,8 @@ const Trades = require('../models/trades');
 /trades?type=buy&user_id=2
  */
 router.get('/', async (req, res, next) => {
-  console.log('req.query ' + req.query);
   try {
-    let type = req.query.type;
-    let user_id = req.query.user_id;
-
+    
     const respuesta = await Trades.findAll();
     res.status(200).send(respuesta);
   } catch (e) {
@@ -43,11 +41,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const respuesta = await Trades.findOne({ where: { id: req.params.id } });
-    console.log(respuesta);
     if (respuesta === null) {
       throw new Error('ID not found');
     }
-
     res.status(200).send(respuesta);
   } catch (e) {
     console.error(e.message);
@@ -61,8 +57,8 @@ creates a new trade
   - If the shares value is out of accepted range [1, 100] (OK)
   - the type value is invalid (i.e. not 'buy' or 'sell') (OK)
   the API must return error code 400. Besides those cases, you can assume that the given payload is always valid.(OK)
-- adds the given trade object to the collection of trades and assigns a unique integer id to it. The first created trade must have id 1, the second one 2, and so on. (CHECK)
-- the response code is 201, and the response body is the created trade object (CHECK)
+- adds the given trade object to the collection of trades and assigns a unique integer id to it. The first created trade must have id 1, the second one 2, and so on. (OK)
+- the response code is 201, and the response body is the created trade object (OK)
 */
 router.post('/', async (req, res, next) => {
   try {
