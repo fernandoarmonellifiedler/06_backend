@@ -24,7 +24,6 @@ const Trades = require('../models/trades');
  */
 router.get('/', async (req, res, next) => {
   try {
-    
     const respuesta = await Trades.findAll();
     res.status(200).send(respuesta);
   } catch (e) {
