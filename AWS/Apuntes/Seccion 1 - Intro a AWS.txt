@@ -1,0 +1,66 @@
+INTRODUCCIÓN A AWS
+
+Que es la nube?
+Cuales son sus ventajas?
+que son los dominios?
+modelos de implementacion
+infraestructura global
+region
+disponibilidad
+
+------------------------
+Introduccion a la nube
+- La infrastructura fisica de mantener una base de datos para a ser manejada por AWS y utilizada como software.
+ - Los recursos de IT se convierten en recursos programables
+ - Las capacidades pueden ser dinamicas
+ - los costos se dan por un modelo de pago por uso
+
+
+¿Que es la nube?
+Computo en la nube se refiere a la entrega bajo demanda de recursos de TI a traves de internet con precios de pago por uso.
+Cada servicio tendra variables diferentes (por giga, por segundo o minutos).
+
+
+Infraestructura y servicios básicos en AWS
+Seguridad: Grupos de seguridad, Network ACLs, AWS IAM
+Red: Elastic Load Balancing, Amazon VPC
+Servidores: AMI => Amazon EC2 instances
+Almacenamiento y base de datos: Amazon EBS, Amazon EFS, Amazon S3, Amazon RDS
+
+
+Soluciones
+Para desarrollar una app para la nube tendremos que integrar varios de estos servicios. Esa integración se representa con un diagrama que llamamos de "solución" que tipicamente realizará un Arquitecto de Soluciones.
+
+Amazon  => User => Amazon EC2 <=> Amazon S3
+Route 53           Amazon EBS
+
+
+¿Como funciona?
+- Para crear una solucion habilitamos los servicios a traves de la consola web.
+- AWS provee la infraestructura fisica y hardware
+- usted solicita y configura dicho servicio
+
+
+Modelo de implementación en la nube
+Tal solucion tiene diferentes formas de implementarse:
+- Arquitectura Nativa: nació en la nube (app all in)
+- Arquitectura Hibrida: algunos elementos en instalaciones del cliente y otros en la nube
+- En instalaciones del cliente: se lleva un rack en casos que se necesite muy baja latencia
+
+
+Infraestructura global de AWS
+Para decidir en que parte de la infraestructura ubicaremos los servicios necesitados revisaremos 3 conceptos: Región, zona de disponibilidad y ubicacion del borde.
+- AWS tiene 24 regiones en el mundo.
+- Cada región es un conjunto (2 o más) de zonas de disponibildad (ZD o AZ).
+- Una Zona de Disponibilidad es un conjunto de uno o más Centros de Datos (Data Center)
+- Un Centro de Datos es un edificio con miles de servidores
+
+Al desplegar un servicio lo primero a seleccionar es en cual region hacerlo y cual ZD
+
+- Ubicaciones de Borde son también centros de datos pero que queremos que esten lo más cerca posible de los lugares finales. Alli no hay servicio de base de datos, ni computo sino servicios que, por ejemplo, convierten un dominio en una direccion IP para llegar a un servidor. Un servicio que se encuentra alli y en todas las alocations es Route 53 o Amazon CloudFront
+
+
+Formas de interactuar con AWS
+- AWS Management Console: intefraz gráfica
+- AWS Command Line Interface (AWS CLI): por comando discreto
+- Software development kits (SDKs): desde su codigo con bibliotecas para los lenguajes de programacion más utilizados
